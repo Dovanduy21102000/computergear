@@ -1,10 +1,9 @@
 <?php
-
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\AuthenticateMiddleware;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +22,10 @@ Route::get('/', function () {
 
 
 //Authentication
-Route::get('admin', [AuthController::class,'index'])->name('auth.admin');
+Route::get('admin', [AuthController::class,'index'])->name('auth.admin')
+->middleware('login');
 Route::post('login', [AuthController::class,'login'])->name('auth.login');
-Route::post('logout', [AuthController::class,'logout'])->name('auth.logout');
+Route::get('logout', [AuthController::class,'logout'])->name('auth.logout');
 
 //Admin
 Route::get('dashboard/index', [DashboardController::class,'index'])->name('dashboard.index')->middleware(AuthenticateMiddleware::class);

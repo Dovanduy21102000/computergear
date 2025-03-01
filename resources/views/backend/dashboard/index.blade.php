@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Dashboard v.2</title>
+    <title>Computer Gear Admin</title>
 
     <link href="backend/css/bootstrap.min.css" rel="stylesheet">
     <link href="backend/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -33,7 +33,7 @@
                             <li><a href="contacts.html">Contacts</a></li>
                             <li><a href="mailbox.html">Mailbox</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
+                            <li><a href="{{ route('auth.logout')}}">Đăng xuất</a></li>
                         </ul>
                     </div>
                     <div class="logo-element">
@@ -367,8 +367,8 @@
 
 
                 <li>
-                    <a href="login.html">
-                        <i class="fa fa-sign-out"></i> Log out
+                    <a href="{{ route('auth.logout')}}">
+                        <i class="fa fa-sign-out"></i> Đăng xuất
                     </a>
                 </li>
                 <li>

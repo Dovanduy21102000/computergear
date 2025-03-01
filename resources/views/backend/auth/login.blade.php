@@ -27,7 +27,7 @@
             <form class="m-t" role="form" action="{{ route('auth.login') }}" method="post">
                 @csrf
                 <div class="form-group">
-                    <input type="text" name="email" class="form-control" placeholder="Nhập email...">
+                    <input type="text" name="email" class="form-control" placeholder="Nhập email..." value="{{old('email')}}">
                     @if ($errors->has('email'))
                         <span class="error-message">!{{$errors->first('email')}}</span>
                     @endif
