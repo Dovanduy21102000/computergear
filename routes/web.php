@@ -1,5 +1,8 @@
 <?php
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\BaseCRUDController;
+
+use App\Http\Controllers\Backend\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\DashboardController;
@@ -36,3 +39,11 @@ Route::get('dashboard/index', [DashboardController::class,'index'])->name('dashb
 Route::get('user/index', [UserController::class,'index'])->name('user.index')
 ->middleware('admin');
 
+$objects = [
+    'posts' => PostController::class
+];
+
+
+foreach ($objects as $object => $controller) {
+    Route::resource($object, $controller);
+}
