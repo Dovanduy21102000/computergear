@@ -59,11 +59,11 @@ class PostController extends BaseCRUDController
     ]);
 }
 
-protected function validateUpdate(Request $request, Post $post)
+protected function validateUpdate(Request $request, $id)
 {
     $request->validate([
-        'name'          => ['required', 'max:255', Rule::unique('posts', 'name')->ignore($post->id)],
-        'slug'          => ['required', 'max:255', Rule::unique('posts', 'slug')->ignore($post->id)],
+        'name'          => ['required', 'max:255', Rule::unique('posts', 'name')->ignore($id)],
+        'slug'          => ['required', 'max:255', Rule::unique('posts', 'slug')->ignore($id)],
         'intro'         => ['nullable', 'max:500'],
         'content'       => ['required'],
         'category_id'   => ['required', 'exists:categories,id'],

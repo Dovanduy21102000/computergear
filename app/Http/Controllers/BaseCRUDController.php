@@ -104,10 +104,10 @@ class BaseCRUDController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validateUpdate($request);
+        $this->validateUpdate($request, $id);
 
         try {
-            $model = new $this->model;
+            $model = $this->model::findOrFail($id);
 
             $model->fill($request->except([$this->fieldImage]));
 
@@ -125,7 +125,7 @@ class BaseCRUDController extends Controller
                 Storage::delete($oldImage);
             }
 
-            return redirect()->route($this->pathView)->with('success', true);
+            return redirect()->route($this->urlBase . 'index')->with('success', true);
         } catch (\Throwable $th) {
             return back()->with('success', false)->with('error', $th->getMessage());
         }
@@ -147,7 +147,7 @@ class BaseCRUDController extends Controller
                 Storage::delete($image);
             }
 
-            return redirect()->route($this->pathView)->with('success', true);
+            return redirect()->route($this->urlBase . 'index')->with('success', true);
         } catch (\Throwable $th) {
             return back()->with('success', false)->with('error', $th->getMessage());
         }
@@ -156,7 +156,13 @@ class BaseCRUDController extends Controller
     /**
      * Validate request (to be overridden in child controllers).
      */
-    protected function validateStore() {}
+    protected function validateStore(Request $request) 
+    {
+        return $request->validate([]);
+    }
 
-    protected function validateUpdate() {}
+    protected function validateUpdate(Request $request, $id) 
+    {
+        return $request->validate([]);
+    }
 }
